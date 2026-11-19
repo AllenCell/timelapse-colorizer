@@ -64,9 +64,11 @@ export enum UrlParam {
   EDGE_COLOR = "edge-color",
   EDGE_MODE = "edge",
   SHOW_SEGMENTATIONS = "seg",
-  /** Background color, encoded as `useAuto:color` where `useAuto` is `1` if
-   * auto background color is used, `0` otherwise, and `color` is a 6-digit hex
-   * color string. */
+  /**
+   * Background color, encoded as `useAuto:color`.
+   * - `useAuto` is `1` if auto background color is used, `0` otherwise.
+   * - `color` is a 6-digit hex color string.
+   */
   BACKGROUND_COLOR = "bg-color",
   // Backdrops
   SHOW_BACKDROP = "bg",
