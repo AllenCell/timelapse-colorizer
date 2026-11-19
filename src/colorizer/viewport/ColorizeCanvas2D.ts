@@ -679,7 +679,7 @@ export default class ColorizeCanvas2D implements IInnerRenderCanvas {
       const backgroundColor = params.useAutoBackgroundColor
         ? new Color(BACKGROUND_COLOR_2D_DEFAULT)
         : params.backgroundColor;
-      this.setUniform("backgroundColor", backgroundColor);
+      this.setUniform("backgroundColor", backgroundColor.clone().convertLinearToSRGB());
     }
 
     // Centroids

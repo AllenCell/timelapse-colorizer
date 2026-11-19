@@ -503,7 +503,9 @@ export class ColorizeCanvas3D implements IInnerRenderCanvas {
       const backgroundColor = params.useAutoBackgroundColor
         ? new Color(BACKGROUND_COLOR_3D_DEFAULT)
         : params.backgroundColor;
-      this.view3d.setBackgroundColor(backgroundColor.toArray() as [number, number, number]);
+      this.view3d.setBackgroundColor(
+        backgroundColor.clone().convertLinearToSRGB().toArray() as [number, number, number]
+      );
       return true;
     }
     return false;
