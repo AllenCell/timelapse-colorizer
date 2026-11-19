@@ -41,7 +41,7 @@ export default function ErrorPage(): ReactElement {
           <p>
             If the issue persists after a refresh,{" "}
             <Link
-              to="https://github.com/allen-cell-animated/timelapse-colorizer/issues/new?template=bug_report.md"
+              to="https://github.com/AllenCell/timelapse-colorizer/issues/new?template=bug_report.md"
               rel="noopener noreferrer"
               target="_blank"
             >
