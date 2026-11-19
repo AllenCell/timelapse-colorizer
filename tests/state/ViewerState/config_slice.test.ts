@@ -43,6 +43,8 @@ const EXAMPLE_SLICE_1: Partial<ConfigSlice> = {
   openTab: TabType.PLOTS,
   plotTab: PlotTabType.SCATTER_PLOT,
   interpolate3d: false,
+  useAutoBackgroundColor: true,
+  backgroundColor: new Color("#d8d8d8"),
 };
 
 const EXAMPLE_SLICE_1_PARAMS: SerializedStoreData = {
@@ -74,6 +76,7 @@ const EXAMPLE_SLICE_1_PARAMS: SerializedStoreData = {
   [UrlParam.OPEN_TAB]: TabType.PLOTS,
   [UrlParam.PLOT_TAB]: PlotTabType.SCATTER_PLOT,
   [UrlParam.INTERPOLATE_3D]: "0",
+  [UrlParam.BACKGROUND_COLOR]: "1:d8d8d8",
 };
 
 const EXAMPLE_SLICE_2: Partial<ConfigSlice> = {
@@ -107,6 +110,8 @@ const EXAMPLE_SLICE_2: Partial<ConfigSlice> = {
   edgeMode: DrawMode.HIDE,
   openTab: TabType.SETTINGS,
   interpolate3d: true,
+  useAutoBackgroundColor: false,
+  backgroundColor: new Color("#ff00ff"),
 };
 
 const EXAMPLE_SLICE_2_PARAMS: SerializedStoreData = {
@@ -137,6 +142,7 @@ const EXAMPLE_SLICE_2_PARAMS: SerializedStoreData = {
   [UrlParam.EDGE_MODE]: DrawMode.HIDE.toString(),
   [UrlParam.OPEN_TAB]: TabType.SETTINGS,
   [UrlParam.INTERPOLATE_3D]: "1",
+  [UrlParam.BACKGROUND_COLOR]: "0:ff00ff",
 };
 
 describe("ConfigSlice", () => {

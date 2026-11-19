@@ -24,6 +24,7 @@ import { nanToNull } from "./data_load_utils";
 import type { AnyManifestFile } from "./dataset_utils";
 import { formatNumber } from "./math_utils";
 
+//// MARK: Constants
 // TODO: This file needs to be split up for easier reading and unit testing.
 
 export const URL_COLOR_RAMP_REVERSED_SUFFIX = "!";
@@ -63,6 +64,12 @@ export enum UrlParam {
   EDGE_COLOR = "edge-color",
   EDGE_MODE = "edge",
   SHOW_SEGMENTATIONS = "seg",
+  /**
+   * Background color, encoded as `useAuto:color`.
+   * - `useAuto` is `1` if auto background color is used, `0` otherwise.
+   * - `color` is a 6-digit hex color string.
+   */
+  BACKGROUND_COLOR = "bg-color",
   // Backdrops
   SHOW_BACKDROP = "bg",
   BACKDROP_KEY = "bg-key",

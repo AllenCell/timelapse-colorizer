@@ -5,7 +5,8 @@ import { PlotRangeType, type ScatterPlotConfig, type VectorConfig, VectorTooltip
 export const DEFAULT_PLAYBACK_FPS = 10;
 export const MAX_FEATURE_CATEGORIES = 12;
 
-export const FRAME_BACKGROUND_COLOR_DEFAULT = "#ffffff";
+export const BACKGROUND_COLOR_2D_DEFAULT = "#ffffff";
+export const BACKGROUND_COLOR_3D_DEFAULT = "#000000";
 export const CANVAS_BACKGROUND_COLOR_DEFAULT = "#f7f7f7";
 export const OUTLINE_COLOR_DEFAULT = "#ff00ff";
 export const OUTLIER_COLOR_DEFAULT = "#c0c0c0";

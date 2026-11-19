@@ -109,6 +109,8 @@ export type RenderCanvasStateParams = {
   backdropSaturation: number;
   backdropBrightness: number;
   interpolate3d: boolean;
+  backgroundColor: Color;
+  useAutoBackgroundColor: boolean;
 };
 
 /** Subset of RenderCanvasStateParams used for colorization. */

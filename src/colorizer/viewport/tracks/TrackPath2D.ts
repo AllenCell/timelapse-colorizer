@@ -3,7 +3,7 @@ import { LineSegments2 } from "three/addons/lines/LineSegments2";
 import { LineSegmentsGeometry } from "three/addons/lines/LineSegmentsGeometry";
 
 import {
-  FRAME_BACKGROUND_COLOR_DEFAULT,
+  BACKGROUND_COLOR_2D_DEFAULT,
   INITIAL_TRACK_PATH_BUFFER_SIZE,
   OUTLINE_COLOR_DEFAULT,
 } from "src/colorizer/constants";
@@ -57,7 +57,7 @@ export default class TrackPath2D {
       linewidth: 1.0,
     });
     const bgLineMaterial = new SubrangeLineMaterial({
-      color: FRAME_BACKGROUND_COLOR_DEFAULT,
+      color: BACKGROUND_COLOR_2D_DEFAULT,
       linewidth: 2.0,
     });
 

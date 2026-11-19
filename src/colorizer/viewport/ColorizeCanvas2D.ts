@@ -23,11 +23,11 @@ import { clamp } from "three/src/math/MathUtils";
 
 import ColorRamp, { ColorRampType } from "src/colorizer/ColorRamp";
 import {
+  BACKGROUND_COLOR_2D_DEFAULT,
   CANVAS_BACKGROUND_COLOR_DEFAULT,
   CENTROID_COLOR_DEFAULT,
   EDGE_COLOR_ALPHA_DEFAULT,
   EDGE_COLOR_DEFAULT,
-  FRAME_BACKGROUND_COLOR_DEFAULT,
   MAX_FEATURE_CATEGORIES,
   OUT_OF_RANGE_COLOR_DEFAULT,
   OUTLIER_COLOR_DEFAULT,
@@ -160,7 +160,7 @@ const getDefaultUniforms = (): ColorizeUniforms => {
     featureColorRampMax: new Uniform(1),
     colorRamp: new Uniform(emptyColorRamp),
     hideOutOfRange: new Uniform(false),
-    backgroundColor: new Uniform(new Color(FRAME_BACKGROUND_COLOR_DEFAULT)),
+    backgroundColor: new Uniform(new Color(BACKGROUND_COLOR_2D_DEFAULT)),
     outlineColor: new Uniform(new Color(OUTLINE_COLOR_DEFAULT)),
     edgeColor: new Uniform(new Color(EDGE_COLOR_DEFAULT)),
     edgeColorAlpha: new Uniform(EDGE_COLOR_ALPHA_DEFAULT),
@@ -673,6 +673,14 @@ export default class ColorizeCanvas2D implements IInnerRenderCanvas {
     }
     this.setUniform("backdropSaturation", clamp(params.backdropSaturation, 0, 100) / 100);
     this.setUniform("backdropBrightness", clamp(params.backdropBrightness, 0, 200) / 100);
+
+    // Background color
+    if (hasPropertyChanged(params, prevParams, ["backgroundColor", "useAutoBackgroundColor"])) {
+      const backgroundColor = params.useAutoBackgroundColor
+        ? new Color(BACKGROUND_COLOR_2D_DEFAULT)
+        : params.backgroundColor;
+      this.setUniform("backgroundColor", backgroundColor.clone().convertLinearToSRGB());
+    }
 
     // Centroids
     if (hasPropertyChanged(params, prevParams, ["centroidColor", "centroidColorMode"])) {

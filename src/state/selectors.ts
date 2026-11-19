@@ -54,6 +54,8 @@ export const renderCanvasStateParamsSelector = (state: ViewerStoreState): Render
   backdropSaturation: state.backdropSaturation,
   backdropBrightness: state.backdropBrightness,
   interpolate3d: state.interpolate3d,
+  backgroundColor: state.backgroundColor,
+  useAutoBackgroundColor: state.useAutoBackgroundColor,
 });
 
 export const colorizeStateSelector = (state: ViewerStoreState): ColorizeStateParams => ({
