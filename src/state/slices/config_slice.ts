@@ -345,6 +345,13 @@ export const createConfigSlice: StateCreator<ConfigSlice, [], [], ConfigSlice> =
 });
 
 export const serializeConfigSlice = (slice: Partial<ConfigSliceSerializableState>): SerializedStoreData => {
+  let backgroundColorParam;
+  if (slice.backgroundColor !== undefined || slice.useAutoBackgroundColor !== undefined) {
+    const backgroundColor = encodeMaybeColor(slice.backgroundColor) ?? BACKGROUND_COLOR_2D_DEFAULT;
+    const useAutoBackgroundColor = encodeMaybeBoolean(slice.useAutoBackgroundColor) ?? 1;
+    backgroundColorParam = `${useAutoBackgroundColor}:${backgroundColor}`;
+  }
+
   return {
     [UrlParam.SHOW_SEGMENTATIONS]: encodeMaybeBoolean(slice.showSegmentations),
     [UrlParam.SHOW_PATH]: encodeMaybeBoolean(slice.showTrackPath),
@@ -383,8 +390,7 @@ export const serializeConfigSlice = (slice: Partial<ConfigSliceSerializableState
     [UrlParam.OPEN_TAB]: slice.openTab,
     [UrlParam.PLOT_TAB]: slice.plotTab,
     [UrlParam.INTERPOLATE_3D]: encodeMaybeBoolean(slice.interpolate3d),
-    [UrlParam.USE_AUTO_BACKGROUND_COLOR]: encodeMaybeBoolean(slice.useAutoBackgroundColor),
-    [UrlParam.BACKGROUND_COLOR]: encodeMaybeColor(slice.backgroundColor),
+    [UrlParam.BACKGROUND_COLOR]: backgroundColorParam,
   };
 };
 
@@ -458,9 +464,13 @@ export const loadConfigSliceFromParams = (slice: ConfigSlice, params: URLSearchP
     slice.setPersistTrackPathWhenOutOfRange
   );
   setValueIfDefined(decodeBoolean(params.get(UrlParam.INTERPOLATE_3D)), slice.setInterpolate3d);
-  setValueIfDefined(decodeBoolean(params.get(UrlParam.USE_AUTO_BACKGROUND_COLOR)), slice.setUseAutoBackgroundColor);
 
-  const backgroundColorParam = decodeHexColor(params.get(UrlParam.BACKGROUND_COLOR));
+  const backgroundColorParams = params.get(UrlParam.BACKGROUND_COLOR)?.split(":");
+  const useAutoBackgroundColorParam = backgroundColorParams ? decodeBoolean(backgroundColorParams[0]) : undefined;
+  const backgroundColorParam = backgroundColorParams ? decodeHexColor(backgroundColorParams[1]) : undefined;
+  if (useAutoBackgroundColorParam !== undefined) {
+    slice.setUseAutoBackgroundColor(useAutoBackgroundColorParam);
+  }
   if (backgroundColorParam) {
     slice.setBackgroundColor(new Color(backgroundColorParam));
   }
