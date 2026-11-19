@@ -19,7 +19,7 @@ import { Box3, Color, Matrix4, Quaternion, Vector2, Vector3 } from "three";
 import { clamp, inverseLerp, lerp } from "three/src/math/MathUtils";
 
 import ColorRamp, { ColorRampType } from "src/colorizer/ColorRamp";
-import { MAX_FEATURE_CATEGORIES } from "src/colorizer/constants";
+import { BACKGROUND_COLOR_3D_DEFAULT, MAX_FEATURE_CATEGORIES } from "src/colorizer/constants";
 import {
   CentroidColorMode,
   ChannelRangePreset,
@@ -495,6 +495,20 @@ export class ColorizeCanvas3D implements IInnerRenderCanvas {
     return globalIds ?? null;
   }
 
+  private handleBackgroundColorUpdate(
+    prevParams: RenderCanvasStateParams | null,
+    params: RenderCanvasStateParams
+  ): boolean {
+    if (hasPropertyChanged(params, prevParams, ["backgroundColor", "useAutoBackgroundColor"])) {
+      const backgroundColor = params.useAutoBackgroundColor
+        ? new Color(BACKGROUND_COLOR_3D_DEFAULT)
+        : params.backgroundColor;
+      this.view3d.setBackgroundColor(backgroundColor.toArray() as [number, number, number]);
+      return true;
+    }
+    return false;
+  }
+
   private updateCentroidColors(): void {
     if (!this.params || !this.params.dataset) {
       return;
@@ -691,6 +705,7 @@ export class ColorizeCanvas3D implements IInnerRenderCanvas {
     const didSettingsUpdate = this.handleSettingsUpdate(prevParams, params);
     const didSelectionUpdate = this.handleSelectionUpdate(prevParams, params);
     const didCentroidUpdate = this.handleCentroidUpdate(prevParams, params);
+    const didBackgroundColorUpdate = this.handleBackgroundColorUpdate(prevParams, params);
     const needsRender =
       didColorRampUpdate ||
       didDatasetUpdate ||
@@ -699,7 +714,8 @@ export class ColorizeCanvas3D implements IInnerRenderCanvas {
       didVectorUpdate ||
       didSettingsUpdate ||
       didSelectionUpdate ||
-      didCentroidUpdate;
+      didCentroidUpdate ||
+      didBackgroundColorUpdate;
 
     if (needsRender) {
       this.render({ synchronous: false });

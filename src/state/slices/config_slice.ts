@@ -3,6 +3,7 @@ import { clamp } from "three/src/math/MathUtils";
 import type { StateCreator } from "zustand";
 
 import {
+  BACKGROUND_COLOR_2D_DEFAULT,
   CENTROID_COLOR_DEFAULT,
   CentroidColorMode,
   ColorRamp,
@@ -103,6 +104,8 @@ export type ConfigSliceState = {
   showTimestamp: boolean;
   /** Whether to interpolate 3D data. True by default. */
   interpolate3d: boolean;
+  useAutoBackgroundColor: boolean;
+  backgroundColor: Color;
 
   // Export settings
   showLegendDuringExport: boolean;
@@ -173,6 +176,8 @@ export type ConfigSliceSerializableState = Pick<
   | "openTab"
   | "plotTab"
   | "interpolate3d"
+  | "useAutoBackgroundColor"
+  | "backgroundColor"
 >;
 
 export type ConfigSliceActions = {
@@ -208,6 +213,8 @@ export type ConfigSliceActions = {
   setOpenTab: (openTab: TabType) => void;
   setPlotTab: (plotTab: PlotTabType) => void;
   setInterpolate3d: (interpolate3d: boolean) => void;
+  setUseAutoBackgroundColor: (useAutoBackgroundColor: boolean) => void;
+  setBackgroundColor: (backgroundColor: Color) => void;
   setOutlineColorMode: (outlineColorMode: SelectionOutlineColorMode) => void;
 };
 
@@ -259,6 +266,8 @@ export const createConfigSlice: StateCreator<ConfigSlice, [], [], ConfigSlice> =
   edgeColor: new Color(EDGE_COLOR_DEFAULT),
   edgeColorAlpha: EDGE_COLOR_ALPHA_DEFAULT,
   edgeMode: DrawMode.USE_COLOR,
+  useAutoBackgroundColor: true,
+  backgroundColor: new Color(BACKGROUND_COLOR_2D_DEFAULT),
 
   // 3D mode
   interpolate3d: true,
@@ -314,6 +323,8 @@ export const createConfigSlice: StateCreator<ConfigSlice, [], [], ConfigSlice> =
   setOpenTab: (openTab) => set({ openTab }),
   setPlotTab: (plotTab) => set({ plotTab: plotTab }),
   setInterpolate3d: (interpolate3d) => set({ interpolate3d }),
+  setUseAutoBackgroundColor: (useAutoBackgroundColor) => set({ useAutoBackgroundColor }),
+  setBackgroundColor: (backgroundColor) => set({ backgroundColor }),
   setOutlinePaletteKey: (key) =>
     set((state) => {
       if (state.outlinePaletteKey === key) {
@@ -409,6 +420,8 @@ export const selectConfigSliceSerializationDeps = (slice: ConfigSlice): ConfigSl
   openTab: slice.openTab,
   plotTab: slice.plotTab,
   interpolate3d: slice.interpolate3d,
+  useAutoBackgroundColor: slice.useAutoBackgroundColor,
+  backgroundColor: slice.backgroundColor,
 });
 
 export function parseTabParams(
@@ -443,6 +456,12 @@ export const loadConfigSliceFromParams = (slice: ConfigSlice, params: URLSearchP
     slice.setPersistTrackPathWhenOutOfRange
   );
   setValueIfDefined(decodeBoolean(params.get(UrlParam.INTERPOLATE_3D)), slice.setInterpolate3d);
+  setValueIfDefined(decodeBoolean(params.get(UrlParam.USE_AUTO_BACKGROUND_COLOR)), slice.setUseAutoBackgroundColor);
+
+  const backgroundColorParam = decodeHexColor(params.get(UrlParam.BACKGROUND_COLOR));
+  if (backgroundColorParam) {
+    slice.setBackgroundColor(new Color(backgroundColorParam));
+  }
 
   slice.setOutOfRangeDrawSettings(
     parseDrawSettings(

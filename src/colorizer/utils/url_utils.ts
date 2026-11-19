@@ -63,6 +63,8 @@ export enum UrlParam {
   EDGE_COLOR = "edge-color",
   EDGE_MODE = "edge",
   SHOW_SEGMENTATIONS = "seg",
+  USE_AUTO_BACKGROUND_COLOR = "bg-auto",
+  BACKGROUND_COLOR = "bg-color",
   // Backdrops
   SHOW_BACKDROP = "bg",
   BACKDROP_KEY = "bg-key",
