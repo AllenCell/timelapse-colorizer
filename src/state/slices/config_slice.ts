@@ -383,6 +383,8 @@ export const serializeConfigSlice = (slice: Partial<ConfigSliceSerializableState
     [UrlParam.OPEN_TAB]: slice.openTab,
     [UrlParam.PLOT_TAB]: slice.plotTab,
     [UrlParam.INTERPOLATE_3D]: encodeMaybeBoolean(slice.interpolate3d),
+    [UrlParam.USE_AUTO_BACKGROUND_COLOR]: encodeMaybeBoolean(slice.useAutoBackgroundColor),
+    [UrlParam.BACKGROUND_COLOR]: encodeMaybeColor(slice.backgroundColor),
   };
 };
 
