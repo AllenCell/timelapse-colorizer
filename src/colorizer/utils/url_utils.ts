@@ -781,7 +781,7 @@ export function resolveUrl(baseUrl: string, url: string): string {
 }
 
 export const makeGitHubIssueLink = (title: string, body: string, labels?: string[]): string => {
-  const baseUrl = "https://github.com/allen-cell-animated/timelapse-colorizer/issues/new";
+  const baseUrl = "https://github.com/AllenCell/timelapse-colorizer/issues/new";
   const titleParam = `title=${encodeURIComponent(title)}`;
   const bodyParam = `body=${encodeURIComponent(body)}`;
   const labelsParam = labels ? `labels=${labels.map(encodeURIComponent).join(",")}` : "";

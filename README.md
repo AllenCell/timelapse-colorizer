@@ -4,16 +4,16 @@
 switch between features in your dataset, play through your data to observe motion, and view plots showing how feature data change over time.
 
 This project originated from [the cell science accelerator at the Allen Institute](https://alleninstitute.org/division/cell-science/) Nuclear Morphogenesis
-project and is being updated to support broader use cases. View our [Issues page](https://github.com/allen-cell-animated/timelapse-colorizer/issues)
+project and is being updated to support broader use cases. View our [Issues page](https://github.com/AllenCell/timelapse-colorizer/issues)
 for more details about potential future features!
 
 ## Builds
 
 **Stable build: [timelapse.allencell.org](https://timelapse.allencell.org)**
 
-**Latest (`main` branch): [https://allen-cell-animated.github.io/timelapse-colorizer/](https://allen-cell-animated.github.io/timelapse-colorizer/)**
+**Latest (`main` branch): [https://allencell.github.io/timelapse-colorizer/](https://allencell.github.io/timelapse-colorizer/)**
 
-![image](https://github.com/allen-cell-animated/timelapse-colorizer/assets/30200665/81130299-7e75-4fc2-a344-19aba7aae8a5)
+![image](https://github.com/AllenCell/timelapse-colorizer/assets/30200665/81130299-7e75-4fc2-a344-19aba7aae8a5)
 
 ## Viewing Custom Datasets
 
@@ -21,7 +21,7 @@ Datasets must be preprocessed for viewing in Timelapse Feature Explorer. We prov
 
 Compatible datasets hosted in an HTTPS-accessible location (ex: AWS S3 bucket, Google Cloud storage, etc.) can be loaded directly from the interface with just a URL. Click the **Load** button in the top right to open a URL.
 
-![image](https://github.com/allen-cell-animated/timelapse-colorizer/assets/30200665/e2631a78-b0d6-49fc-bb93-cefc94a91a53)
+![image](https://github.com/AllenCell/timelapse-colorizer/assets/30200665/e2631a78-b0d6-49fc-bb93-cefc94a91a53)
 
 For local datasets, you can install and use the `tfe-open` CLI tool included in the [`tfe-data`](https://github.com/AllenCell/tfe-data) Python package. Please check the [`tfe-data` GitHub repository](https://github.com/AllenCell/tfe-data) for the latest version.
 
@@ -46,7 +46,7 @@ to access HTTPS-hosted datasets without installing the project.
 Open a command terminal and run the following commands. Installation may take a few minutes.
 
 ```bash
-git clone https://github.com/allen-cell-animated/timelapse-colorizer.git
+git clone https://github.com/AllenCell/timelapse-colorizer.git
 cd timelapse-colorizer
 npm install
 ```

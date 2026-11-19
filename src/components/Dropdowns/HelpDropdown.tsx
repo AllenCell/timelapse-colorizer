@@ -57,7 +57,7 @@ export default function HelpDropdown(): ReactElement {
     <DropdownItemList>
       <StyledLink
         className="button"
-        href="https://github.com/allen-cell-animated/timelapse-colorizer"
+        href="https://github.com/AllenCell/timelapse-colorizer"
         rel="noopener noreferrer"
         target="_blank"
         role="link"
@@ -67,7 +67,7 @@ export default function HelpDropdown(): ReactElement {
       </StyledLink>
       <StyledLink
         className="button"
-        href="https://github.com/allen-cell-animated/timelapse-colorizer/issues"
+        href="https://github.com/AllenCell/timelapse-colorizer/issues"
         rel="noopener noreferrer"
         target="_blank"
         role="link"
